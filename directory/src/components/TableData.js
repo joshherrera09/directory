@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "react-moment";
 // import "./style.css";
 
 function TableData(props) {
@@ -6,7 +7,8 @@ function TableData(props) {
         <table className="tableEmployee" >
             <thead>
                 <tr>
-                    <th onClick={props.sortByName}>Name</th>
+                    <th></th>
+                    <th onClick={props.sortByName} style={{cursor:'pointer'}}>Name (Click to Sort)</th>
                     <th>Phone</th>
                     <th>E-mail</th>
                     <th>Birthday</th>
@@ -21,6 +23,7 @@ function TableData(props) {
                         <td>{result.name.first + " " + result.name.last}</td>
                         <td>{result.cell}</td>
                         <td className="email"><a href={result.email}>{result.email}</a></td>
+                        <td><Moment format="MM/DD/YYYY">{result.dob.date}</Moment></td>
                     </tr>
                 ))}
             </tbody>
