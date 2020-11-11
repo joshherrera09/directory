@@ -4,6 +4,7 @@ import Search from "./Search";
 import TableData from "./TableData";
 
 class Container extends Component {
+    // Set initial state
     state = {
         search: "",
         employees: [],
@@ -47,7 +48,15 @@ class Container extends Component {
         })
     };
 
-    employeeSearch = event => {
+    employeeSearch = () => {
+        API.getUsers()
+            .then(res => this.setState({
+                filteredEmployees: res.date.results,
+                employees: res.data.results
+            })).catch(error => console.log(error))
+    }
+
+    handleSearch = event => {
         event.preventDefault();
         if (!this.state.search) {
             alert("Please enter a valid name")
@@ -63,11 +72,11 @@ class Container extends Component {
     render() {
         return (
             <div>
-                <SearchBox
+                <Search
                     employee={this.state.employees}
                     handleSearch={this.handleSearch}
                     handleInputChange={this.ahndleInputChange} />
-                <TableDate results={this.state.filteredEmployees}
+                <TableData results={this.state.filteredEmployees}
                     sortByName={this.sortByName} />
             </div>
         )
